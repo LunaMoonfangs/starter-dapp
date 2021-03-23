@@ -6,9 +6,10 @@ import { Redirect } from 'react-router-dom';
 import Overview from 'components/Overview';
 import { Address } from '@elrondnetwork/erdjs/out';
 import { AccountType } from 'helpers/contractDataDefinitions';
+import { getItem } from 'storage/session';
 
 const Dashboard = () => {
-  const { loggedIn, dapp, address } = useContext();
+  const { loggedIn, dapp, address, ledgerAccount } = useContext();
   const dispatch = useDispatch();
 
   if (!loggedIn) {
@@ -22,6 +23,16 @@ const Dashboard = () => {
         account: new AccountType(account.balance.toString(), account.nonce),
       });
     });
+    if (getItem('ledgerLogin') && !ledgerAccount) {
+      const ledgerLogin = getItem('ledgerLogin');
+      dispatch({
+        type: 'setLedgerAccount',
+        ledgerAccount: {
+          index: ledgerLogin.index,
+          address: address,
+        },
+      });
+    }
   };
   useEffect(fetchAccount, []);
 
