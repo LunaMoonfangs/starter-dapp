@@ -3,7 +3,7 @@ import { decimals, denomination } from 'config';
 import { useContext } from 'context';
 import denominate from 'components/Denominate/formatters';
 import StatCard from 'components/StatCard';
-import { Address, NetworkStake } from '@elrondnetwork/erdjs/out';
+import { Address, NetworkStake } from '@elrondnetwork/erdjs';
 import { useState } from 'react';
 
 import SetPercentageFeeAction from './SetPercentageFeeAction';
@@ -101,7 +101,7 @@ const Views = () => {
         valueUnit=""
         color="orange"
         svg="leaf-solid.svg"
-        percentage="Annual percentage rate"
+        percentage="Annual percentage rate incl. service fee"
         tooltipText="This is an approximate APR calculation for this year based on the current epoch"
       />
       <StatCard

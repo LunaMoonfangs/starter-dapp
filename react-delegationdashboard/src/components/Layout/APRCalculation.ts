@@ -1,4 +1,4 @@
-import { ContractReturnData } from '@elrondnetwork/erdjs/out/smartcontracts/query';
+import { decodeString } from '@elrondnetwork/erdjs';
 import denominate from 'components/Denominate/formatters';
 import {
   yearSettings,
@@ -31,12 +31,16 @@ const calculateAPR = ({
   stats: Stats;
   networkConfig: NetworkConfig;
   networkStake: NetworkStake;
-  blsKeys: ContractReturnData[];
+  blsKeys: Buffer[];
   totalActiveStake: string;
 }) => {
-  const allNodes = blsKeys.filter(key => key.asString === 'staked' || key.asString === 'jailed')
-    .length;
-  const allActiveNodes = blsKeys.filter(key => key.asString === 'staked').length;
+  const allNodes = blsKeys.filter(
+    key =>
+      decodeString(key) === 'staked' ||
+      decodeString(key) === 'jailed' ||
+      decodeString(key) === 'queued'
+  ).length;
+  const allActiveNodes = blsKeys.filter(key => decodeString(key) === 'staked').length;
   if (allActiveNodes <= 0) {
     return '0.00';
   }
@@ -73,8 +77,7 @@ const calculateAPR = ({
     allActiveNodes
   );
   const validatorBaseStake = actualNumberOfNodes * stakePerNode;
-  const validatorTopUpStake =
-    ((validatorTotalStake - allNodes * stakePerNode) / allNodes) * allActiveNodes;
+  const validatorTopUpStake = validatorTotalStake - allNodes * stakePerNode;
   const validatorTopUpReward =
     networkTopUpStake > 0 ? (validatorTopUpStake / networkTopUpStake) * topUpReward : 0;
   const validatorBaseReward = (validatorBaseStake / networkBaseStake) * baseReward;
