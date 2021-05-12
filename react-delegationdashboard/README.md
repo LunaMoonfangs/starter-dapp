@@ -1,4 +1,3 @@
-
 <div style="text-align:center">
   <img
   src="https://raw.githubusercontent.com/ElrondNetwork/starter-dapp/master/react-delegationdashboard/preview.png"
