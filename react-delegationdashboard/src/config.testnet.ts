@@ -1,4 +1,4 @@
-import { object, string, boolean, InferType } from 'yup';
+import { object, string, InferType } from 'yup';
 import { DelegationContractType } from './helpers/types';
 
 export const minDust: string = '5000000000000000'; // 0.005 EGLD
@@ -28,6 +28,8 @@ export const stakingContract: string =
 export const delegationManagerContract: string =
   'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqylllslmq6y6';
 export const walletConnectBridge: string = 'https://bridge.walletconnect.org';
+export const walletConnectDeepLink: string =
+  'https://maiar.page.link/?apn=com.elrond.maiar.wallet&isi=1519405832&ibi=com.elrond.maiar.wallet&link=https://maiar.com/';
 
 export const network: NetworkType = {
   id: 'testnet',
