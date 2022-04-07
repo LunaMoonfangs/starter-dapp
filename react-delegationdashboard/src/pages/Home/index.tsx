@@ -30,7 +30,7 @@ const Home = () => {
           <div className="card my-spacer text-center">
             <div className="card-body p-spacer mx-lg-spacer">
               <Logo className="logo mb-spacer" />
-              <h4 className="mb-spacer">StakeCON Delegation Manager</h4>
+              <h4 className="mb-spacer">Remus Delegation Manager</h4>
               <p className="lead mb-spacer">
                 Delegate Elrond ({egldLabel}) with only 10% service fee!
               </p>
